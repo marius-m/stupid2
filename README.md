@@ -1,6 +1,14 @@
 # Stupid2 - Card game
 
-A multi-platform app I was working on long time ago. Right now, only &rsquo;CLI&rsquo; app is working (play a game on terminal, by running the project).
+
+## Story
+
+My first project *ever*, was a card game as well, built on Java Applet (yep, that tech, that time ago). During my vacation from log time ago, I started re-coding the same game out of fun. It got outdated quite fast (was on LibGDX). Scraped platform stuff, moved logic. Now it is forming into something playable (or not 🤷️).
+
+
+## So what is this?
+
+Wanna be: a multi-platform card game, to play over network. Now: Working card game logic of &rsquo;Stupid&rsquo;
 
 -   Currently you could try out the rules and play a bit using &rsquo;cli&rsquo; module, by running &rsquo;Main.kt&rsquo;
 
