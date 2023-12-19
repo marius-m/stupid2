@@ -15,6 +15,6 @@ pluginManagement {
     }
 }
 
-rootProject.name = "ComposeTest1"
+rootProject.name = "Stupid2"
 
 include(":android", ":desktop", ":common", ":logic", ":cli")
