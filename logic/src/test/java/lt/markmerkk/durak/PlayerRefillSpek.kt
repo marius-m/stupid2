@@ -7,7 +7,7 @@ import java.util.*
 class PlayerRefillSpek: DescribeSpec({
     describe("deck has enough cards") {
         lateinit var refillingDeck: RefillingDeck
-        beforeTest {
+        beforeContainer {
             refillingDeck = RefillingDeck(
                     cards = ArrayDeque<Card>(
                             listOf<Card>(
@@ -104,7 +104,7 @@ class PlayerRefillSpek: DescribeSpec({
 
     describe("not enough cards in deck") {
         lateinit var refillingDeck: RefillingDeck
-        beforeTest {
+        beforeContainer {
             refillingDeck = RefillingDeck(
                     cards = ArrayDeque<Card>(
                             listOf<Card>(

@@ -26,7 +26,7 @@ class PlayingTableAttackSpek : DescribeSpec({
 
     describe("playing table already has attacking item") {
         lateinit var playingTable: PlayingTable
-        beforeTest {
+        beforeContainer {
             playingTable = PlayingTable(
                 cards = listOf(
                     PlayingCardPair(
@@ -71,7 +71,7 @@ class PlayingTableAttackSpek : DescribeSpec({
 
     describe("playing table is full") {
         lateinit var playingTable: PlayingTable
-        beforeTest {
+        beforeContainer {
             playingTable = PlayingTable(cards = listOf(
                     PlayingCardPair(
                             attackingCard = Card(DIAMOND, TWO),
