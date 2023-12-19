@@ -2,6 +2,8 @@ package lt.markmerkk
 
 import lt.markmerkk.durak.Card
 import lt.markmerkk.durak.CardRank.*
+import lt.markmerkk.durak.CardSpek.*
+import lt.markmerkk.durak.CardSuite
 import lt.markmerkk.durak.CardSuite.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test

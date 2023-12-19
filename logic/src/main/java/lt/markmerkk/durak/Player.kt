@@ -40,8 +40,27 @@ data class Player(
         cardsInHand = refilledCards.toList()
     }
 
+    /**
+     * Sorts cards by its weight
+     * - Trump suites go first
+     * - Higher cards go first
+     */
     fun sortByWeight() {
-        cardsInHand = cardsInHand.sortedBy { it.weight() }
+        val mutableCards = mutableListOf<Card>()
+        val trumpCardSuite = cardsInHand
+            .firstOrNull { it.isTrump }
+        val cardSuites: List<CardSuite> = if (trumpCardSuite != null) {
+            CardSuite.valuesWithFirstAsTrump(trumpSuite = trumpCardSuite.suite)
+        } else {
+            CardSuite.values().toList()
+        }
+        cardSuites.forEach { cardSuite ->
+            val cardsOfSuite = cardsInHand
+                .filter { it.suite == cardSuite }
+                .sortedByDescending { it.weight() }
+            mutableCards.addAll(cardsOfSuite)
+        }
+        cardsInHand = mutableCards.toList()
     }
 
     override fun toString(): String {

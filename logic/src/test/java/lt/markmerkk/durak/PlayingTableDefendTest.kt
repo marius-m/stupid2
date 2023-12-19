@@ -3,7 +3,6 @@ package lt.markmerkk.durak
 import lt.markmerkk.durak.CardRank.*
 import lt.markmerkk.durak.CardSuite.*
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.fail
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows

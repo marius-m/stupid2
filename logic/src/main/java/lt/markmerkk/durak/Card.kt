@@ -88,13 +88,25 @@ fun List<Card>.trumpOrThrow(): CardSuite {
 fun List<Card>.filterSameRank(rank: CardRank): List<Card> = filter { it.rank == rank }
 
 enum class CardSuite(
-        val out: String
+    val out: String
 ) {
     SPADE("S"),
     HEART("H"),
     DIAMOND("D"),
     CLUB("C"),
     ;
+
+    companion object {
+
+        /**
+         * Returns all suites with first item as trump
+         */
+        fun valuesWithFirstAsTrump(trumpSuite: CardSuite): List<CardSuite> {
+            return setOf(trumpSuite)
+                .plus(CardSuite.values())
+                .toList()
+        }
+    }
 }
 
 enum class CardRank(

@@ -36,10 +36,10 @@ class CliCardDrawerBasicExplain(
     enum class CardTemplate(
             val representationLine: String
     ) {
-        SPADE("%s♠(%sS)"),
-        DIAMOND("%s♦(%sD)"),
-        CLUB("%s♣(%sC)"),
-        HEART("%s❤(%sH)")
+        SPADE("♠%s(S%s)"),
+        DIAMOND("♦%s(D%s)"),
+        CLUB("♣%s(C%s)"),
+        HEART("❤%s(H%s)")
         ;
 
         companion object {

@@ -46,7 +46,7 @@ class Main {
 
         logger.info("Hello and welcome to game of 'Stupid'!\n")
         while (!game.isGameOver) {
-            printGameStatus(players, game.playingTable, turnsManager, cliCardDrawer, game.refillingDeck)
+            printGameStatus(game, players, game.playingTable, turnsManager, cliCardDrawer, game.refillingDeck)
             val inputAction = cliInputHandler.handleInput(inputReader.nextLine())
             logger.divider()
             when (inputAction) {
@@ -61,6 +61,7 @@ class Main {
     }
 
     fun printGameStatus(
+        game: Game,
         players: List<Player>,
         playingTable: PlayingTable,
         turnsManager: TurnsManager,
@@ -76,10 +77,9 @@ class Main {
             logger.info(cliCardDrawer.drawCards(it.cardsInHand()))
         }
         logger.info(
-            """
-                ${turnsManager.attackingPlayer.name} attacking; 
-                Cards in deck: ${refillingDeck.cards.size};
-        """.trimIndent())
+            """ 
+                Player turn: ${turnsManager.attackingPlayer.name}; Cards in deck: ${refillingDeck.cards.size}; Trumps: ${game.cardSuiteTrump}; 
+            """.trimIndent())
         logger.info("For available player actions, type in \"?\"")
         logger.info("For concrete player available actions \"[player name] ?\"")
     }
@@ -97,9 +97,9 @@ fun main(args : Array<String>) {
  * Prints massive divider
  */
 fun Logger.divider() {
-    info("------------------------------------------\n")
-    info("------------------------------------------\n")
-    info("------------------------------------------\n")
-    info("------------------------------------------\n")
-    info("------------------------------------------\n")
+    info("------------------------------------------")
+    info("------------------------------------------")
+    info("------------------------------------------")
+    info("------------------------------------------")
+    info("------------------------------------------")
 }
