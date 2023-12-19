@@ -1,13 +1,12 @@
 package lt.markmerkk.durak
 
+import io.kotest.core.spec.style.DescribeSpec
 import lt.markmerkk.durak.CardRank.*
 import lt.markmerkk.durak.CardSuite.DIAMOND
 import lt.markmerkk.durak.CardSuite.SPADE
 import org.assertj.core.api.Assertions.assertThat
-import org.spekframework.spek2.Spek
-import org.spekframework.spek2.style.specification.describe
 
-object PlayingTableFirstUndefendedCardSpek: Spek({
+class PlayingTableFirstUndefendedCardSpek: DescribeSpec({
 
     val playingTable = PlayingTable(emptyList())
 

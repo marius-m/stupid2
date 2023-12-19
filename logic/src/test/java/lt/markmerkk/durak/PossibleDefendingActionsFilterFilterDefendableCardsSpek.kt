@@ -1,11 +1,10 @@
 package lt.markmerkk.durak
 
+import io.kotest.core.spec.style.DescribeSpec
 import lt.markmerkk.durak.actions.PossibleDefendingActionsFilter
 import org.assertj.core.api.Assertions.assertThat
-import org.spekframework.spek2.Spek
-import org.spekframework.spek2.style.specification.describe
 
-object PossibleDefendingActionsFilterFilterDefendableCardsSpek : Spek({
+class PossibleDefendingActionsFilterFilterDefendableCardsSpek : DescribeSpec({
     val possibleDefendingActionsFilter = PossibleDefendingActionsFilter()
 
     describe("regular cards") {

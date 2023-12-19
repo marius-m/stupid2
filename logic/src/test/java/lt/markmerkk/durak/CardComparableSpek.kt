@@ -1,10 +1,9 @@
 package lt.markmerkk.durak
 
+import io.kotest.core.spec.style.DescribeSpec
 import org.assertj.core.api.Assertions.assertThat
-import org.spekframework.spek2.Spek
-import org.spekframework.spek2.style.specification.describe
 
-object CardComparableSpek: Spek({
+class CardComparableSpek: DescribeSpec({
     describe("non trump card compare") {
         context("lower card") {
             val compareResult = Card(CardSuite.HEART, CardRank.KING).compareTo(Card(CardSuite.HEART, CardRank.ACE))

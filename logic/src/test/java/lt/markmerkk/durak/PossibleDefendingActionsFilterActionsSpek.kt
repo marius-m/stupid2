@@ -1,5 +1,6 @@
 package lt.markmerkk.durak
 
+import io.kotest.core.spec.style.DescribeSpec
 import lt.markmerkk.Mocks
 import lt.markmerkk.durak.CardRank.*
 import lt.markmerkk.durak.CardSuite.*
@@ -7,10 +8,8 @@ import lt.markmerkk.durak.actions.ActionTakeAllCards
 import lt.markmerkk.durak.actions.ActionThrowInCard
 import lt.markmerkk.durak.actions.PossibleDefendingActionsFilter
 import org.assertj.core.api.Assertions.assertThat
-import org.spekframework.spek2.Spek
-import org.spekframework.spek2.style.specification.describe
 
-object PossibleDefendingActionsFilterActionsSpek : Spek({
+class PossibleDefendingActionsFilterActionsSpek : DescribeSpec({
     val possibleDefendingActionsFilter = PossibleDefendingActionsFilter()
     val defendingPlayer = Player(name = "Marius")
 

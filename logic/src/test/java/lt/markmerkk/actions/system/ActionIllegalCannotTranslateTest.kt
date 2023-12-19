@@ -1,13 +1,12 @@
 package lt.markmerkk.actions.system
 
+import io.kotest.core.spec.style.DescribeSpec
 import lt.markmerkk.Mocks
 import lt.markmerkk.durak.actions.ActionTakeAllCards
 import lt.markmerkk.durak.actions.system.ActionIllegalCannotTranslate
 import org.assertj.core.api.Assertions.assertThat
-import org.spekframework.spek2.Spek
-import org.spekframework.spek2.style.specification.describe
 
-object ActionIllegalCannotTranslateTest: Spek({
+class ActionIllegalCannotTranslateTest: DescribeSpec({
     describe("object equality works properly") {
 
         context("same instance") {

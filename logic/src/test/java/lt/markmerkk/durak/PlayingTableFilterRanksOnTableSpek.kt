@@ -1,10 +1,9 @@
 package lt.markmerkk.durak
 
+import io.kotest.core.spec.style.DescribeSpec
 import org.assertj.core.api.Assertions.assertThat
-import org.spekframework.spek2.Spek
-import org.spekframework.spek2.style.specification.describe
 
-object PlayingTableFilterRanksOnTableSpek: Spek({
+class PlayingTableFilterRanksOnTableSpek: DescribeSpec({
     describe("filter works properly") {
         context("empty table") {
             val resultRanks = PlayingTable(

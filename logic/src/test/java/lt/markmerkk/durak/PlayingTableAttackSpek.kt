@@ -1,14 +1,13 @@
 package lt.markmerkk.durak
 
+import io.kotest.core.spec.style.DescribeSpec
 import lt.markmerkk.durak.CardRank.*
 import lt.markmerkk.durak.CardSuite.DIAMOND
 import lt.markmerkk.durak.CardSuite.HEART
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
-import org.spekframework.spek2.Spek
-import org.spekframework.spek2.style.specification.describe
 
-object PlayingTableAttackSpek : Spek({
+class PlayingTableAttackSpek : DescribeSpec({
     describe("playing table is empty") {
         val playingTable = PlayingTable(cards = emptyList())
 
@@ -27,7 +26,7 @@ object PlayingTableAttackSpek : Spek({
 
     describe("playing table already has attacking item") {
         lateinit var playingTable: PlayingTable
-        beforeEachTest {
+        beforeTest {
             playingTable = PlayingTable(
                 cards = listOf(
                     PlayingCardPair(
@@ -72,7 +71,7 @@ object PlayingTableAttackSpek : Spek({
 
     describe("playing table is full") {
         lateinit var playingTable: PlayingTable
-        beforeEachTest {
+        beforeTest {
             playingTable = PlayingTable(cards = listOf(
                     PlayingCardPair(
                             attackingCard = Card(DIAMOND, TWO),

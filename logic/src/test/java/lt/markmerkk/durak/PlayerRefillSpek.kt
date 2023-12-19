@@ -1,14 +1,13 @@
 package lt.markmerkk.durak
 
+import io.kotest.core.spec.style.DescribeSpec
 import org.assertj.core.api.Assertions.assertThat
-import org.spekframework.spek2.Spek
-import org.spekframework.spek2.style.specification.describe
 import java.util.*
 
-object PlayerRefillSpek: Spek({
+class PlayerRefillSpek: DescribeSpec({
     describe("deck has enough cards") {
         lateinit var refillingDeck: RefillingDeck
-        beforeEachTest {
+        beforeTest {
             refillingDeck = RefillingDeck(
                     cards = ArrayDeque<Card>(
                             listOf<Card>(
@@ -105,7 +104,7 @@ object PlayerRefillSpek: Spek({
 
     describe("not enough cards in deck") {
         lateinit var refillingDeck: RefillingDeck
-        beforeEachTest {
+        beforeTest {
             refillingDeck = RefillingDeck(
                     cards = ArrayDeque<Card>(
                             listOf<Card>(
@@ -170,6 +169,5 @@ object PlayerRefillSpek: Spek({
             }
         }
     }
-
 })
 

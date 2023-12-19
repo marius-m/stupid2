@@ -1,10 +1,9 @@
 package lt.markmerkk.durak
 
+import io.kotest.core.spec.style.DescribeSpec
 import org.assertj.core.api.Assertions.assertThat
-import org.spekframework.spek2.Spek
-import org.spekframework.spek2.style.specification.describe
 
-object CardFilterSameRankSpek: Spek({
+class CardFilterSameRankSpek: DescribeSpec({
     describe("filtering works properly") {
         context("no items in the filter") {
             val cardsToFilter: List<Card> = emptyList()

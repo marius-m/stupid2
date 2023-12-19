@@ -1,14 +1,13 @@
 package lt.markmerkk.actions
 
+import io.kotest.core.spec.style.DescribeSpec
 import lt.markmerkk.durak.Player
 import lt.markmerkk.durak.actions.CliInputHandler
 import lt.markmerkk.durak.actions.system.ActionIllegalCannotTranslate
 import lt.markmerkk.durak.actions.system.ActionIllegalMultipleActions
 import org.assertj.core.api.Assertions.assertThat
-import org.spekframework.spek2.Spek
-import org.spekframework.spek2.style.specification.describe
 
-object CliInputHandlerSpek : Spek({
+class CliInputHandlerSpek : DescribeSpec({
     val players = listOf(Player(name = "Marius"), Player(name = "Enrika"))
     describe("input handler works properly") {
 
