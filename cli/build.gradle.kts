@@ -7,6 +7,7 @@ plugins {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
+    implementation(project(":logic"))
 
     implementation("org.slf4j:slf4j-api:${slf4j_version}")
     implementation("ch.qos.logback:logback-classic:1.2.11")

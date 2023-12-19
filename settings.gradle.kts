@@ -17,4 +17,4 @@ pluginManagement {
 
 rootProject.name = "ComposeTest1"
 
-include(":android", ":desktop", ":common", ":logic")
+include(":android", ":desktop", ":common", ":logic", ":cli")
