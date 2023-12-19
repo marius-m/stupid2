@@ -44,7 +44,7 @@ class GameThrowCardTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         game = Game(
-                cards = Card.generateDeck(),
+                cards = Card.generateDeck(cardTypeTrump = CLUB),
                 players = players,
                 turnsManager = turnsManager,
                 refillingDeck = refillingDeck,

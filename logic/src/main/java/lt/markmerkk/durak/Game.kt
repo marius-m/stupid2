@@ -6,6 +6,7 @@ import java.util.*
 
 class Game(
         cards: List<Card>,
+        val cardSuiteTrump: CardSuite = cards.trumpOrThrow(),
         val players: List<Player>,
         val turnsManager: TurnsManager,
         val refillingDeck: RefillingDeck = RefillingDeck(cards = ArrayDeque<Card>(cards.toMutableList().shuffled())),
@@ -21,7 +22,10 @@ class Game(
     }
 
     fun refillPlayerCards() {
-        players.forEach { it.refill(refillingDeck) }
+        players.forEach { player ->
+            player.refill(refillingDeck)
+            player.sortByWeight()
+        }
     }
 
     fun availablePlayerActions(player: Player): List<ActionGame> {

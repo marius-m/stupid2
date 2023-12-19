@@ -40,6 +40,10 @@ data class Player(
         cardsInHand = refilledCards.toList()
     }
 
+    fun sortByWeight() {
+        cardsInHand = cardsInHand.sortedBy { it.weight() }
+    }
+
     override fun toString(): String {
         return "Player(name=$name)"
     }

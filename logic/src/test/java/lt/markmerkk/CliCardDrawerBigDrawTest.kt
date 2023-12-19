@@ -9,14 +9,14 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.MockitoAnnotations
 
-class CliCardDrawerDrawTest {
+class CliCardDrawerBigDrawTest {
 
-    lateinit var drawer: CliCardDrawer
+    lateinit var drawer: CliCardDrawerBig
 
     @BeforeEach
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        drawer = CliCardDrawer()
+        drawer = CliCardDrawerBig(firstLineBreak = false)
     }
 
     @Test

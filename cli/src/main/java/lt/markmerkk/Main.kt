@@ -22,7 +22,7 @@ class Main {
         )
         val turnsManager = TurnsManager(players = players)
         val game = Game(
-                cards = Card.generateDeckSmall(),
+                cards = Card.generateDeckSmall(cardTypeTrump = Card.randomSuite()),
                 players = players,
                 turnsManager = turnsManager
         )
@@ -42,7 +42,7 @@ class Main {
                         ActionTranslatorFinishRound(players)
                 )
         )
-        val cliCardDrawer = CliCardDrawer()
+        val cliCardDrawer = CliCardDrawerBasicExplain(firstLineBreak = false)
 
         logger.info("Hello and welcome to game of 'Stupid'!\n")
         while (!game.isGameOver) {
@@ -61,24 +61,27 @@ class Main {
     }
 
     fun printGameStatus(
-            players: List<Player>,
-            playingTable: PlayingTable,
-            turnsManager: TurnsManager,
-            cliCardDrawer: CliCardDrawer,
-            refillingDeck: RefillingDeck
+        players: List<Player>,
+        playingTable: PlayingTable,
+        turnsManager: TurnsManager,
+        cliCardDrawer: CliCardDrawer,
+        refillingDeck: RefillingDeck
     ) {
-        logger.info("\n--- Cards on table --- \n")
+        logger.info("--- Cards on table ---")
         logger.info(cliCardDrawer.drawCards(playingTable.allAttackingCards()))
         logger.info(cliCardDrawer.drawCards(playingTable.allDefendingCards()))
-        logger.info("\n------- \n")
+        logger.info("------- ")
         players.forEach {
-            logger.info("${it.name}'s cards (${it.cardsInHandSize()}): \n")
+            logger.info("${it.name}'s cards (${it.cardsInHandSize()}): ")
             logger.info(cliCardDrawer.drawCards(it.cardsInHand()))
-            logger.info("\n")
         }
-        logger.info("Game status: ${turnsManager.attackingPlayer.name} turn to attack. ${refillingDeck.cards.size} cards left in deck.\n")
-        logger.info("For available player actions, type in \"?\"\n")
-        logger.info("For concrete player available actions \"[player name] ?\"\n")
+        logger.info(
+            """
+                ${turnsManager.attackingPlayer.name} attacking; 
+                Cards in deck: ${refillingDeck.cards.size};
+        """.trimIndent())
+        logger.info("For available player actions, type in \"?\"")
+        logger.info("For concrete player available actions \"[player name] ?\"")
     }
 
     companion object {

@@ -6,15 +6,15 @@ import lt.markmerkk.durak.CardSuite.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class CliCardDrawerCardRankDisplayTest {
+class CliCardDrawerCardRankDisplayTestBig {
 
-    private val drawer = CliCardDrawer()
+    private val drawer = CliCardDrawerBig(firstLineBreak = false)
 
     @Test
     fun upper_oneSymbol() {
         // Assemble
         // Act
-        val resultRank = CliCardDrawer.CardTemplate.cardDisplayUpper(Card(SPADE, NINE))
+        val resultRank = CliCardDrawerBig.CardTemplate.cardDisplayUpper(Card(SPADE, NINE))
 
         // Assert
         assertThat(resultRank).isEqualTo("9 ")
@@ -24,7 +24,7 @@ class CliCardDrawerCardRankDisplayTest {
     fun upper_twoSymbols() {
         // Assemble
         // Act
-        val resultRank = CliCardDrawer.CardTemplate.cardDisplayUpper(Card(SPADE, TEN))
+        val resultRank = CliCardDrawerBig.CardTemplate.cardDisplayUpper(Card(SPADE, TEN))
 
         // Assert
         assertThat(resultRank).isEqualTo("10")
@@ -34,7 +34,7 @@ class CliCardDrawerCardRankDisplayTest {
     fun lower1() {
         // Assemble
         // Act
-        val resultRank = CliCardDrawer.CardTemplate.cardDisplayLower(Card(SPADE, NINE))
+        val resultRank = CliCardDrawerBig.CardTemplate.cardDisplayLower(Card(SPADE, NINE))
 
         // Assert
         assertThat(resultRank).isEqualTo("_S9")
@@ -44,7 +44,7 @@ class CliCardDrawerCardRankDisplayTest {
     fun lower2() {
         // Assemble
         // Act
-        val resultRank = CliCardDrawer.CardTemplate.cardDisplayLower(Card(CLUB, ACE))
+        val resultRank = CliCardDrawerBig.CardTemplate.cardDisplayLower(Card(CLUB, ACE))
 
         // Assert
         assertThat(resultRank).isEqualTo("_CA")
@@ -54,7 +54,7 @@ class CliCardDrawerCardRankDisplayTest {
     fun lower3() {
         // Assemble
         // Act
-        val resultRank = CliCardDrawer.CardTemplate.cardDisplayLower(Card(DIAMOND, JACK))
+        val resultRank = CliCardDrawerBig.CardTemplate.cardDisplayLower(Card(DIAMOND, JACK))
 
         // Assert
         assertThat(resultRank).isEqualTo("_DJ")
@@ -64,7 +64,7 @@ class CliCardDrawerCardRankDisplayTest {
     fun lower_twoSymbolRank() {
         // Assemble
         // Act
-        val resultRank = CliCardDrawer.CardTemplate.cardDisplayLower(Card(HEART, TEN))
+        val resultRank = CliCardDrawerBig.CardTemplate.cardDisplayLower(Card(HEART, TEN))
 
         // Assert
         assertThat(resultRank).isEqualTo("H10")
