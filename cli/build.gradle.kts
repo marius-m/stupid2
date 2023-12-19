@@ -20,13 +20,12 @@ dependencies {
 //    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}")
     testImplementation("com.nhaarman:mockito-kotlin:1.6.0")
     testImplementation("org.mockito:mockito-core:5.8.0")
-    testImplementation("org.spekframework.spek2:spek-dsl-jvm:2.0.19")
-    testImplementation("org.spekframework.spek2:spek-runner-junit5:2.0.19")
+    testImplementation("io.kotest:kotest-runner-junit5-jvm:5.7.2")
+    testImplementation("io.kotest:kotest-assertions-core:5.7.2")
+    testImplementation("io.kotest:kotest-property:5.7.2")
     testImplementation("org.assertj:assertj-core:3.10.0")
 }
 
-tasks.test {
-    useJUnitPlatform {
-        includeEngines("spek2")
-    }
+tasks.withType<Test>().configureEach {
+    useJUnitPlatform()
 }

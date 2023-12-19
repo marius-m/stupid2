@@ -1,13 +1,13 @@
-package lt.markmerkk.durak
+package lt.markmerkk.durak.actions
 
+import io.kotest.core.spec.style.DescribeSpec
 import lt.markmerkk.actions.ActionTranslatorQuit
 import lt.markmerkk.actions.system.ActionSystemQuit
+import lt.markmerkk.durak.Player
 import lt.markmerkk.durak.actions.system.ActionIllegalCannotTranslate
 import org.assertj.core.api.Assertions.assertThat
-import org.spekframework.spek2.Spek
-import org.spekframework.spek2.style.specification.describe
 
-object ActionTranslatorQuitSpek: Spek({
+class ActionTranslatorQuitSpek: DescribeSpec({
     val player1 = Player(name = "Marius")
     val player2 = Player(name = "Enrika")
     val players = listOf(player1, player2)
