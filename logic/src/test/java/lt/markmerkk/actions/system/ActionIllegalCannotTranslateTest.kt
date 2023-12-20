@@ -1,10 +1,10 @@
 package lt.markmerkk.actions.system
 
+import com.google.common.truth.Truth.assertThat
 import io.kotest.core.spec.style.DescribeSpec
 import lt.markmerkk.Mocks
 import lt.markmerkk.durak.actions.ActionTakeAllCards
 import lt.markmerkk.durak.actions.system.ActionIllegalCannotTranslate
-import org.assertj.core.api.Assertions.assertThat
 
 class ActionIllegalCannotTranslateTest: DescribeSpec({
     describe("object equality works properly") {

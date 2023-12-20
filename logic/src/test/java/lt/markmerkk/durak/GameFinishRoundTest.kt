@@ -1,25 +1,27 @@
 package lt.markmerkk.durak
 
-import com.nhaarman.mockito_kotlin.*
+import io.mockk.MockKAnnotations
+import io.mockk.every
+import io.mockk.impl.annotations.RelaxedMockK
+import io.mockk.spyk
+import io.mockk.verify
 import lt.markmerkk.durak.CardRank.*
 import lt.markmerkk.durak.CardSuite.*
 import lt.markmerkk.durak.actions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.mockito.Mock
-import org.mockito.MockitoAnnotations
 
 class GameFinishRoundTest {
 
-    @Mock lateinit var turnsManager: TurnsManager
-    @Mock lateinit var refillingDeck: RefillingDeck
-    @Mock lateinit var playingTable: PlayingTable
-    @Mock lateinit var attackingActionsFilter: PossibleAttackingActionsFilter
-    @Mock lateinit var defendingActionsFilter: PossibleDefendingActionsFilter
+    @RelaxedMockK lateinit var turnsManager: TurnsManager
+    @RelaxedMockK lateinit var refillingDeck: RefillingDeck
+    @RelaxedMockK lateinit var playingTable: PlayingTable
+    @RelaxedMockK lateinit var attackingActionsFilter: PossibleAttackingActionsFilter
+    @RelaxedMockK lateinit var defendingActionsFilter: PossibleDefendingActionsFilter
 
     lateinit var game: Game
 
-    private val playerAttacking = spy(Player(
+    private val playerAttacking = spyk(Player(
             name = "Marius",
             cardsInHand = listOf(
                     Card(HEART, ACE),
@@ -27,7 +29,7 @@ class GameFinishRoundTest {
                     Card(HEART, QUEEN)
             )
     ))
-    private val playerDefending = spy(Player(
+    private val playerDefending = spyk(Player(
             name = "Enrika",
             cardsInHand = listOf(
                     Card(SPADE, ACE),
@@ -39,7 +41,7 @@ class GameFinishRoundTest {
 
     @BeforeEach
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockKAnnotations.init(this)
         game = Game(
                 cards = Card.generateDeck(cardTypeTrump = CLUB),
                 players = players,
@@ -49,10 +51,10 @@ class GameFinishRoundTest {
                 attackingActionsFilter = attackingActionsFilter,
                 defendingActionsFilter = defendingActionsFilter
         )
-        doReturn(playerAttacking).whenever(turnsManager).attackingPlayer
-        doReturn(playerDefending).whenever(turnsManager).defendingPlayer
-        doNothing().whenever(playerAttacking).refill(any())
-        doNothing().whenever(playerDefending).refill(any())
+        every { turnsManager.attackingPlayer } returns playerAttacking
+        every { turnsManager.defendingPlayer } returns playerDefending
+        every { playerAttacking.refill(any()) } returns Unit
+        every { playerDefending.refill(any()) } returns Unit
     }
 
     @Test
@@ -61,16 +63,18 @@ class GameFinishRoundTest {
         val action = ActionFinishRound(
                 actionIssuer = playerDefending
         )
-        doReturn(true).whenever(turnsManager).isAttacking(any())
-        doReturn(listOf(action)).whenever(attackingActionsFilter).filterActions(any(), any(), any(), any())
+        every { turnsManager.isAttacking(any()) } returns true
+        every { attackingActionsFilter.filterActions(any(), any(), any(), any()) } returns listOf(action)
 
         // Act
         game.finishRound(action)
 
         // Assert
-        verify(playingTable).clearAllCards()
-        verify(turnsManager).endRound()
-        players.forEach { verify(it).refill(any()) }
+        verify { playingTable.clearAllCards() }
+        verify { turnsManager.endRound() }
+        players.forEach {
+            verify { it.refill(any()) }
+        }
     }
 
     @Test
@@ -79,16 +83,18 @@ class GameFinishRoundTest {
         val action = ActionFinishRound(
                 actionIssuer = playerDefending
         )
-        doReturn(true).whenever(turnsManager).isAttacking(any())
-        doReturn(emptyList<ActionGame>()).whenever(attackingActionsFilter).filterActions(any(), any(), any(), any()) // cannot perform any action
+        every { turnsManager.isAttacking(any()) } returns true
+        every { attackingActionsFilter.filterActions(any(), any(), any(), any()) } returns emptyList() // cannot perform any action
 
         // Act
         game.finishRound(action)
 
         // Assert
-        verify(playingTable, never()).clearAllCards()
-        verify(turnsManager, never()).endRound()
-        players.forEach { verify(it, never()).refill(any()) }
+        verify(exactly = 0) { playingTable.clearAllCards() }
+        verify(exactly = 0) { turnsManager.endRound() }
+        players.forEach {
+            verify(exactly = 0) { it.refill(any()) }
+        }
     }
 
     @Test
@@ -97,16 +103,18 @@ class GameFinishRoundTest {
         val action = ActionFinishRound(
                 actionIssuer = playerDefending
         )
-        doReturn(false).whenever(turnsManager).isAttacking(any()) // not attacking player
-        doReturn(listOf(action)).whenever(attackingActionsFilter).filterActions(any(), any(), any(), any())
+        every { turnsManager.isAttacking(any()) } returns false // not attacking player
+        every { attackingActionsFilter.filterActions(any(), any(), any(), any()) } returns listOf(action)
 
         // Act
         game.finishRound(action)
 
         // Assert
-        verify(playingTable, never()).clearAllCards()
-        verify(turnsManager, never()).endRound()
-        players.forEach { verify(it, never()).refill(any()) }
+        verify(exactly = 0) { playingTable.clearAllCards() }
+        verify(exactly = 0) { turnsManager.endRound() }
+        players.forEach {
+            verify(exactly = 0) { it.refill(any()) }
+        }
     }
 
 }

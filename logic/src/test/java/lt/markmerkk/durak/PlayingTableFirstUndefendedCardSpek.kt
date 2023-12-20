@@ -1,10 +1,10 @@
 package lt.markmerkk.durak
 
+import com.google.common.truth.Truth.assertThat
 import io.kotest.core.spec.style.DescribeSpec
 import lt.markmerkk.durak.CardRank.*
 import lt.markmerkk.durak.CardSuite.DIAMOND
 import lt.markmerkk.durak.CardSuite.SPADE
-import org.assertj.core.api.Assertions.assertThat
 
 class PlayingTableFirstUndefendedCardSpek: DescribeSpec({
 

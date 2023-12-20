@@ -1,5 +1,6 @@
 package lt.markmerkk.durak
 
+import com.google.common.truth.Truth.assertThat
 import io.kotest.core.spec.style.DescribeSpec
 import lt.markmerkk.Mocks
 import lt.markmerkk.durak.CardRank.*
@@ -7,7 +8,6 @@ import lt.markmerkk.durak.CardSuite.*
 import lt.markmerkk.durak.actions.ActionTakeAllCards
 import lt.markmerkk.durak.actions.ActionThrowInCard
 import lt.markmerkk.durak.actions.PossibleDefendingActionsFilter
-import org.assertj.core.api.Assertions.assertThat
 
 class PossibleDefendingActionsFilterActionsSpek : DescribeSpec({
     val possibleDefendingActionsFilter = PossibleDefendingActionsFilter()
@@ -55,7 +55,7 @@ class PossibleDefendingActionsFilterActionsSpek : DescribeSpec({
             val resultThrownActions = resultActions.filterIsInstance(ActionThrowInCard::class.java)
 
             it("multiple variations to defend") {
-                assertThat(resultThrownActions).containsExactlyInAnyOrder(
+                assertThat(resultThrownActions).containsExactly(
                         ActionThrowInCard(actionIssuer = defendingPlayer, thrownCard = Card(SPADE, ACE)),
                         ActionThrowInCard(actionIssuer = defendingPlayer, thrownCard = Card(SPADE, KING)),
                         ActionThrowInCard(actionIssuer = defendingPlayer, thrownCard = Card(SPADE, QUEEN)),
@@ -84,7 +84,7 @@ class PossibleDefendingActionsFilterActionsSpek : DescribeSpec({
             val resultThrownActions = resultActions.filterIsInstance(ActionThrowInCard::class.java)
 
             it("multiple variations to defend") {
-                assertThat(resultThrownActions).containsExactlyInAnyOrder(
+                assertThat(resultThrownActions).containsExactly(
                         ActionThrowInCard(actionIssuer = defendingPlayer, thrownCard = Card(SPADE, ACE)),
                         ActionThrowInCard(actionIssuer = defendingPlayer, thrownCard = Card(SPADE, KING))
                 )
@@ -112,7 +112,7 @@ class PossibleDefendingActionsFilterActionsSpek : DescribeSpec({
             val resultThrownActions = resultActions.filterIsInstance(ActionThrowInCard::class.java)
 
             it("multiple variations to defend") {
-                assertThat(resultThrownActions).containsExactlyInAnyOrder(
+                assertThat(resultThrownActions).containsExactly(
                         ActionThrowInCard(actionIssuer = defendingPlayer, thrownCard = Card(SPADE, ACE)),
                         ActionThrowInCard(actionIssuer = defendingPlayer, thrownCard = Card(SPADE, KING)),
                         ActionThrowInCard(actionIssuer = defendingPlayer, thrownCard = Card(DIAMOND, TWO, isTrump = true))
@@ -144,7 +144,7 @@ class PossibleDefendingActionsFilterActionsSpek : DescribeSpec({
             val resultThrownActions = resultActions.filterIsInstance(ActionThrowInCard::class.java)
 
             it("only first first undefended card can be thrown") {
-                assertThat(resultThrownActions).containsExactlyInAnyOrder(
+                assertThat(resultThrownActions).containsExactly(
                         ActionThrowInCard(actionIssuer = defendingPlayer, thrownCard = Card(SPADE, ACE)),
                         ActionThrowInCard(actionIssuer = defendingPlayer, thrownCard = Card(SPADE, KING)),
                         ActionThrowInCard(actionIssuer = defendingPlayer, thrownCard = Card(DIAMOND, TWO, isTrump = true))

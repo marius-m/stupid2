@@ -1,12 +1,12 @@
 package lt.markmerkk.durak
 
+import com.google.common.truth.Truth.assertThat
+import io.mockk.MockKAnnotations
 import lt.markmerkk.durak.CardRank.*
 import lt.markmerkk.durak.CardSuite.*
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import org.mockito.MockitoAnnotations
 
 class PlayingTableDefendTest {
 
@@ -14,7 +14,7 @@ class PlayingTableDefendTest {
 
     @BeforeEach
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockKAnnotations.init(this)
         playingTable = PlayingTable(emptyList())
     }
 

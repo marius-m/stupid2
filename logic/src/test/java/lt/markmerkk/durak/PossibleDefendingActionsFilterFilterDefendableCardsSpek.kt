@@ -1,8 +1,8 @@
 package lt.markmerkk.durak
 
+import com.google.common.truth.Truth.assertThat
 import io.kotest.core.spec.style.DescribeSpec
 import lt.markmerkk.durak.actions.PossibleDefendingActionsFilter
-import org.assertj.core.api.Assertions.assertThat
 
 class PossibleDefendingActionsFilterFilterDefendableCardsSpek : DescribeSpec({
     val possibleDefendingActionsFilter = PossibleDefendingActionsFilter()
@@ -20,7 +20,7 @@ class PossibleDefendingActionsFilterFilterDefendableCardsSpek : DescribeSpec({
 
             // Assert
             it("valid options") {
-                assertThat(resultActions).containsExactlyInAnyOrder(
+                assertThat(resultActions).containsExactly(
                         Card(CardSuite.HEART, CardRank.QUEEN),
                         Card(CardSuite.HEART, CardRank.KING)
                 )
@@ -74,7 +74,7 @@ class PossibleDefendingActionsFilterFilterDefendableCardsSpek : DescribeSpec({
 
             // Assert
             it("valid options") {
-                assertThat(resultActions).containsExactlyInAnyOrder(
+                assertThat(resultActions).containsExactly(
                         Card(CardSuite.HEART, CardRank.QUEEN),
                         Card(CardSuite.HEART, CardRank.KING),
                         Card(CardSuite.SPADE, CardRank.TWO, isTrump = true)
@@ -110,7 +110,7 @@ class PossibleDefendingActionsFilterFilterDefendableCardsSpek : DescribeSpec({
 
             // Assert
             it("only trump") {
-                assertThat(resultActions).containsExactlyInAnyOrder(
+                assertThat(resultActions).containsExactly(
                         Card(CardSuite.SPADE, CardRank.SEVEN, isTrump = true)
                 )
             }

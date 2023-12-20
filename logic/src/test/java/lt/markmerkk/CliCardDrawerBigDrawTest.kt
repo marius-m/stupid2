@@ -1,13 +1,13 @@
 package lt.markmerkk
 
+import com.google.common.truth.Truth.assertThat
+import io.mockk.MockKAnnotations
 import lt.markmerkk.durak.Card
 import lt.markmerkk.durak.CardRank
 import lt.markmerkk.durak.CardRank.ACE
 import lt.markmerkk.durak.CardSuite.*
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.mockito.MockitoAnnotations
 
 class CliCardDrawerBigDrawTest {
 
@@ -15,7 +15,7 @@ class CliCardDrawerBigDrawTest {
 
     @BeforeEach
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockKAnnotations.init(this)
         drawer = CliCardDrawerBig(firstLineBreak = false)
     }
 

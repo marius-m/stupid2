@@ -1,7 +1,7 @@
 package lt.markmerkk.durak
 
+import com.google.common.truth.Truth.assertThat
 import io.kotest.core.spec.style.DescribeSpec
-import org.assertj.core.api.Assertions.assertThat
 import kotlin.random.Random
 
 class CardSpek: DescribeSpec({

@@ -1,8 +1,8 @@
 package lt.markmerkk.durak
 
+import com.google.common.truth.Truth.assertThat
 import lt.markmerkk.durak.CardRank.*
 import lt.markmerkk.durak.CardSuite.*
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class PlayingTableFirstUndefendedCardPairIndexTest {

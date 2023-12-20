@@ -1,11 +1,12 @@
 package lt.markmerkk.durak
 
+import com.google.common.truth.Truth.assertThat
 import io.kotest.core.spec.style.DescribeSpec
 import lt.markmerkk.durak.CardRank.*
 import lt.markmerkk.durak.CardSuite.DIAMOND
 import lt.markmerkk.durak.CardSuite.HEART
-import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatThrownBy
+import org.junit.jupiter.api.assertThrows
+import kotlin.IllegalArgumentException
 
 class PlayingTableAttackSpek : DescribeSpec({
     describe("playing table is empty") {
@@ -56,7 +57,9 @@ class PlayingTableAttackSpek : DescribeSpec({
 
         context("try adding different rank card") {
             it("should throw exception as an illegal action") {
-                assertThatThrownBy { playingTable.attack(Card(DIAMOND, JACK)) }
+                assertThrows<IllegalArgumentException> {
+                    playingTable.attack(Card(DIAMOND, JACK))
+                }
             }
             it("should not contain card on table") {
                 assertThat(playingTable.cards).containsExactly(
@@ -101,7 +104,9 @@ class PlayingTableAttackSpek : DescribeSpec({
         }
         context("valid card thrown") {
             it("should throw exception as an illegal action") {
-                assertThatThrownBy { playingTable.attack(Card(HEART, SIX)) }
+                assertThrows<IllegalArgumentException> {
+                    playingTable.attack(Card(HEART, SIX))
+                }
             }
             it("should not contain card on table") {
                 assertThat(playingTable.cards.size).isEqualTo(Consts.MAX_PAIRS_ON_TABLE)

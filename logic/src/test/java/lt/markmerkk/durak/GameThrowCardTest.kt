@@ -1,6 +1,10 @@
 package lt.markmerkk.durak
 
-import com.nhaarman.mockito_kotlin.*
+import io.mockk.MockKAnnotations
+import io.mockk.every
+import io.mockk.impl.annotations.RelaxedMockK
+import io.mockk.spyk
+import io.mockk.verify
 import lt.markmerkk.durak.CardRank.*
 import lt.markmerkk.durak.CardSuite.*
 import lt.markmerkk.durak.actions.ActionGame
@@ -9,20 +13,18 @@ import lt.markmerkk.durak.actions.PossibleAttackingActionsFilter
 import lt.markmerkk.durak.actions.PossibleDefendingActionsFilter
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.mockito.Mock
-import org.mockito.MockitoAnnotations
 
 class GameThrowCardTest {
 
-    @Mock lateinit var turnsManager: TurnsManager
-    @Mock lateinit var refillingDeck: RefillingDeck
-    @Mock lateinit var playingTable: PlayingTable
-    @Mock lateinit var attackingActionsFilter: PossibleAttackingActionsFilter
-    @Mock lateinit var defendingActionsFilter: PossibleDefendingActionsFilter
+    @RelaxedMockK lateinit var turnsManager: TurnsManager
+    @RelaxedMockK lateinit var refillingDeck: RefillingDeck
+    @RelaxedMockK lateinit var playingTable: PlayingTable
+    @RelaxedMockK lateinit var attackingActionsFilter: PossibleAttackingActionsFilter
+    @RelaxedMockK lateinit var defendingActionsFilter: PossibleDefendingActionsFilter
 
     lateinit var game: Game
 
-    private val playerAttacking = spy(Player(
+    private val playerAttacking = spyk(Player(
             name = "Marius",
             cardsInHand = listOf(
                     Card(HEART, ACE),
@@ -30,7 +32,7 @@ class GameThrowCardTest {
                     Card(HEART, QUEEN)
             )
     ))
-    private val playerDefending = spy(Player(
+    private val playerDefending = spyk(Player(
             name = "Enrika",
             cardsInHand = listOf(
                     Card(SPADE, ACE),
@@ -42,7 +44,7 @@ class GameThrowCardTest {
 
     @BeforeEach
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockKAnnotations.init(this)
         game = Game(
                 cards = Card.generateDeck(cardTypeTrump = CLUB),
                 players = players,
@@ -52,8 +54,8 @@ class GameThrowCardTest {
                 attackingActionsFilter = attackingActionsFilter,
                 defendingActionsFilter = defendingActionsFilter
         )
-        doReturn(playerAttacking).whenever(turnsManager).attackingPlayer
-        doReturn(playerDefending).whenever(turnsManager).defendingPlayer
+        every { turnsManager.attackingPlayer } returns playerAttacking
+        every { turnsManager.defendingPlayer } returns playerDefending
     }
 
     @Test
@@ -64,15 +66,15 @@ class GameThrowCardTest {
                 actionIssuer = playerAttacking,
                 thrownCard = card
         )
-        doReturn(true).whenever(turnsManager).isAttacking(any())
-        doReturn(listOf(action)).whenever(attackingActionsFilter).filterActions(any(), any(), any(), any())
+        every { turnsManager.isAttacking(any()) } returns true
+        every { attackingActionsFilter.filterActions(any(), any(), any(), any()) } returns listOf(action)
 
         // Act
         game.throwCard(action)
 
         // Assert
-        verify(playingTable).attack(card)
-        verify(playerAttacking).removeCard(card)
+        verify { playingTable.attack(card) }
+        verify { playerAttacking.removeCard(card) }
     }
 
     @Test
@@ -83,15 +85,15 @@ class GameThrowCardTest {
                 actionIssuer = playerAttacking,
                 thrownCard = card
         )
-        doReturn(true).whenever(turnsManager).isAttacking(any())
-        doReturn(emptyList<ActionGame>()).whenever(attackingActionsFilter).filterActions(any(), any(), any(), any()) // Action cannot be performed
+        every { turnsManager.isAttacking(any()) } returns true
+        every { attackingActionsFilter.filterActions(any(), any(), any(), any()) } returns emptyList<ActionGame>() // Action cannot be performed
 
         // Act
         game.throwCard(action)
 
         // Assert
-        verify(playingTable, never()).attack(card)
-        verify(playerAttacking, never()).removeCard(card)
+        verify(exactly = 0) { playingTable.attack(card) }
+        verify(exactly = 0) { playerAttacking.removeCard(card) }
     }
 
     @Test
@@ -102,15 +104,15 @@ class GameThrowCardTest {
                 actionIssuer = playerAttacking,
                 thrownCard = card
         )
-        doReturn(true).whenever(turnsManager).isAttacking(any())
-        doReturn(listOf(action)).whenever(attackingActionsFilter).filterActions(any(), any(), any(), any())
-        doThrow(IllegalArgumentException()).whenever(playingTable).attack(any()) // illegal action performed
+        every { turnsManager.isAttacking(any()) } returns true
+        every { attackingActionsFilter.filterActions(any(), any(), any(), any()) } returns listOf(action)
+        every { playingTable.attack(any()) } throws IllegalArgumentException()
 
         // Act
         game.throwCard(action)
 
         // Assert
-        verify(playerAttacking, never()).removeCard(card)
+        verify(exactly = 0) { playerAttacking.removeCard(card) }
     }
 
     @Test
@@ -121,15 +123,15 @@ class GameThrowCardTest {
                 actionIssuer = playerDefending,
                 thrownCard = card
         )
-        doReturn(true).whenever(turnsManager).isDefending(any())
-        doReturn(listOf(action)).whenever(defendingActionsFilter).filterActions(any(), any(), any())
+        every { turnsManager.isDefending(any()) } returns true
+        every { defendingActionsFilter.filterActions(any(), any(), any()) } returns listOf(action)
 
         // Act
         game.throwCard(action)
 
         // Assert
-        verify(playingTable).defend(card)
-        verify(playerDefending).removeCard(card)
+        verify { playingTable.defend(card) }
+        verify { playerDefending.removeCard(card) }
     }
 
     @Test
@@ -140,15 +142,15 @@ class GameThrowCardTest {
                 actionIssuer = playerDefending,
                 thrownCard = card
         )
-        doReturn(true).whenever(turnsManager).isDefending(any())
-        doReturn(emptyList<ActionGame>()).whenever(defendingActionsFilter).filterActions(any(), any(), any())
+        every { turnsManager.isDefending(any()) } returns true
+        every { defendingActionsFilter.filterActions(any(), any(), any()) } returns emptyList<ActionGame>()
 
         // Act
         game.throwCard(action)
 
         // Assert
-        verify(playingTable, never()).defend(card)
-        verify(playerDefending, never()).removeCard(card)
+        verify(exactly = 0) { playingTable.defend(card) }
+        verify(exactly = 0) { playerDefending.removeCard(card) }
     }
 
     @Test
@@ -159,15 +161,15 @@ class GameThrowCardTest {
                 actionIssuer = playerDefending,
                 thrownCard = card
         )
-        doReturn(true).whenever(turnsManager).isDefending(any())
-        doReturn(listOf(action)).whenever(defendingActionsFilter).filterActions(any(), any(), any())
-        doThrow(IllegalArgumentException()).whenever(playingTable).defend(any()) // incorrect action performed
+        every { turnsManager.isDefending(any()) } returns true
+        every { defendingActionsFilter.filterActions(any(), any(), any()) } returns listOf(action)
+        every { playingTable.defend(any()) } throws IllegalArgumentException()
 
         // Act
         game.throwCard(action)
 
         // Assert
-        verify(playerDefending, never()).removeCard(card)
+        verify(exactly = 0) { playerDefending.removeCard(card) }
     }
 
 }

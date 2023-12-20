@@ -1,7 +1,7 @@
 package lt.markmerkk.durak
 
+import com.google.common.truth.Truth.assertThat
 import io.kotest.core.spec.style.DescribeSpec
-import org.assertj.core.api.Assertions.assertThat
 
 class PlayingTableUndefendedCardsOnTableSpek: DescribeSpec({
     describe("filter works properly") {
@@ -30,7 +30,7 @@ class PlayingTableUndefendedCardsOnTableSpek: DescribeSpec({
             ).undefendedCardsOnTable()
 
             it("filters undefended cards") {
-                assertThat(resultRanks).containsExactlyInAnyOrder(
+                assertThat(resultRanks).containsExactly(
                         Card(CardSuite.SPADE, CardRank.ACE),
                         Card(CardSuite.SPADE, CardRank.KING)
                 )
@@ -52,7 +52,7 @@ class PlayingTableUndefendedCardsOnTableSpek: DescribeSpec({
             ).undefendedCardsOnTable()
 
             it("filters only undefended cards") {
-                assertThat(resultRanks).containsExactlyInAnyOrder(
+                assertThat(resultRanks).containsExactly(
                         Card(CardSuite.SPADE, CardRank.ACE)
                 )
             }

@@ -1,7 +1,7 @@
 package lt.markmerkk.durak
 
+import com.google.common.truth.Truth.assertThat
 import io.kotest.core.spec.style.DescribeSpec
-import org.assertj.core.api.Assertions.assertThat
 
 class CardSuiteSpek: DescribeSpec({
     describe("card suite sorting") {
@@ -18,7 +18,7 @@ class CardSuiteSpek: DescribeSpec({
         }
 
         context("regular suite order") {
-            val result = CardSuite.values()
+            val result = CardSuite.values().toList()
             it("should have regular order") {
                 assertThat(result).containsExactly(
                     CardSuite.SPADE,

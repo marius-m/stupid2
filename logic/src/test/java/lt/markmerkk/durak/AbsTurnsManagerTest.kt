@@ -1,8 +1,8 @@
 package lt.markmerkk.durak
 
+import io.mockk.MockKAnnotations
 import lt.markmerkk.Mocks
 import org.junit.jupiter.api.BeforeEach
-import org.mockito.MockitoAnnotations
 
 abstract class AbsTurnsManagerTest {
 
@@ -16,7 +16,7 @@ abstract class AbsTurnsManagerTest {
 
     @BeforeEach
     open fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockKAnnotations.init(this)
         turnsManager2Player = TurnsManager(
                 listOf(
                         player1,

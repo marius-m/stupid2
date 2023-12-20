@@ -18,13 +18,16 @@ dependencies {
 
 //    testImplementation("org.jetbrains.kotlin:kotlin-test:${kotlinVersion}")
 //    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}")
-    testImplementation("com.nhaarman:mockito-kotlin:1.6.0")
-    testImplementation("org.mockito:mockito-core:5.8.0")
-    testImplementation("org.assertj:assertj-core:3.10.0")
+    testImplementation("com.google.truth:truth:1.2.0")
+    testImplementation("io.mockk:mockk:1.13.7")
 
     testImplementation("io.kotest:kotest-runner-junit5-jvm:5.7.2")
     testImplementation("io.kotest:kotest-assertions-core:5.7.2")
     testImplementation("io.kotest:kotest-property:5.7.2")
+}
+
+kotlin {
+    jvmToolchain(11)
 }
 
 tasks.withType<Test>().configureEach {

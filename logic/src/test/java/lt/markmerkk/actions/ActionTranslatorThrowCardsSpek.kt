@@ -1,11 +1,11 @@
 package lt.markmerkk.actions
 
+import com.google.common.truth.Truth.assertThat
 import io.kotest.core.spec.style.DescribeSpec
 import lt.markmerkk.durak.*
 import lt.markmerkk.durak.actions.ActionTranslatorThrowCards
 import lt.markmerkk.durak.actions.system.ActionIllegalCannotTranslate
 import lt.markmerkk.durak.actions.ActionThrowInCard
-import org.assertj.core.api.Assertions.assertThat
 
 class ActionTranslatorThrowCardsSpek : DescribeSpec({
 

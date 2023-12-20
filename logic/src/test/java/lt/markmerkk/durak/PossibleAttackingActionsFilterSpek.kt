@@ -1,5 +1,6 @@
 package lt.markmerkk.durak
 
+import com.google.common.truth.Truth.assertThat
 import io.kotest.core.spec.style.DescribeSpec
 import lt.markmerkk.Mocks
 import lt.markmerkk.durak.CardRank.*
@@ -7,7 +8,6 @@ import lt.markmerkk.durak.CardSuite.*
 import lt.markmerkk.durak.actions.ActionFinishRound
 import lt.markmerkk.durak.actions.ActionThrowInCard
 import lt.markmerkk.durak.actions.PossibleAttackingActionsFilter
-import org.assertj.core.api.Assertions.assertThat
 
 class PossibleAttackingActionsFilterSpek : DescribeSpec({
     val attackingPlayer = Player(name = "Marius")
@@ -28,7 +28,7 @@ class PossibleAttackingActionsFilterSpek : DescribeSpec({
             )
 
             it("should be able to throw in any card") {
-                assertThat(resultActions).containsExactlyInAnyOrder(
+                assertThat(resultActions).containsExactly(
                         ActionThrowInCard(actionIssuer = attackingPlayer, thrownCard = Card(SPADE, ACE)),
                         ActionThrowInCard(actionIssuer = attackingPlayer, thrownCard = Card(SPADE, KING)),
                         ActionThrowInCard(actionIssuer = attackingPlayer, thrownCard = Card(SPADE, QUEEN)),
@@ -61,7 +61,7 @@ class PossibleAttackingActionsFilterSpek : DescribeSpec({
             )
 
             it("should be able to throw in same rank card") {
-                assertThat(resultActions).containsExactlyInAnyOrder(
+                assertThat(resultActions).containsExactly(
                         ActionThrowInCard(actionIssuer = attackingPlayer, thrownCard = Card(HEART, JACK))
                 )
             }
@@ -91,7 +91,7 @@ class PossibleAttackingActionsFilterSpek : DescribeSpec({
 
             // Assert
             it("should be able to throw in same rank card") {
-                assertThat(resultActions).containsExactlyInAnyOrder(
+                assertThat(resultActions).containsExactly(
                         ActionThrowInCard(actionIssuer = attackingPlayer, thrownCard = Card(HEART, JACK)),
                         ActionThrowInCard(actionIssuer = attackingPlayer, thrownCard = Card(DIAMOND, JACK)),
                         ActionThrowInCard(actionIssuer = attackingPlayer, thrownCard = Card(CLUB, JACK))
@@ -138,7 +138,7 @@ class PossibleAttackingActionsFilterSpek : DescribeSpec({
                             listOf(
                                     PlayingCardPair(
                                             attackingCard = Card(SPADE, JACK),
-                                            defendingCard = Card(SPADE, KING)
+                                            defendingCard = Card(SPADE, KING),
                                     )
                             )
                     ),
@@ -146,9 +146,9 @@ class PossibleAttackingActionsFilterSpek : DescribeSpec({
             )
 
             it("should be able to throw in same rank card") {
-                assertThat(resultActions).contains(
+                assertThat(resultActions).containsAnyOf(
                         ActionThrowInCard(actionIssuer = attackingPlayer, thrownCard = Card(HEART, JACK)),
-                        ActionThrowInCard(actionIssuer = attackingPlayer, thrownCard = Card(HEART, KING))
+                        ActionThrowInCard(actionIssuer = attackingPlayer, thrownCard = Card(HEART, KING)),
                 )
             }
         }
@@ -198,7 +198,7 @@ class PossibleAttackingActionsFilterSpek : DescribeSpec({
             )
 
             it("no more cards can be thrown in") {
-                assertThat(resultActions).doesNotHaveAnyElementsOfTypes(ActionThrowInCard::class.java)
+                assertThat(resultActions).doesNotContain(ActionThrowInCard::class.java)
             }
         }
 
@@ -349,9 +349,9 @@ class PossibleAttackingActionsFilterSpek : DescribeSpec({
             )
 
             it("only one card may be thrown in") {
-                assertThat(resultActions).containsExactlyInAnyOrder(
+                assertThat(resultActions).containsExactly(
                         ActionThrowInCard(actionIssuer = attackingPlayer, thrownCard = Card(HEART, JACK)),
-                        ActionThrowInCard(actionIssuer = attackingPlayer, thrownCard = Card(HEART, KING))
+                        ActionThrowInCard(actionIssuer = attackingPlayer, thrownCard = Card(HEART, KING)),
                 )
             }
         }
